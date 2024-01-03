@@ -1,0 +1,77 @@
+import com.attendace.leopard.data.source.remote.model.dto.RecorderDto;
+import com.attendace.leopard.data.source.remote.model.dto.Type;
+import kotlin.Boolean;
+import kotlin.Double;
+
+
+-- CREATE TABLE AttendanceEntity (
+--   time TEXT PRIMARY KEY NOT NULL,
+--   isMissed INTEGER AS Boolean NOT NULL,
+--   isEnter INTEGER AS Boolean NOT NULL,
+--   cardReaderName TEXT NOT NULL
+-- );
+
+CREATE TABLE LogEntity(
+    id TEXT PRIMARY KEY NOT NULL,
+    isMissed INTEGER AS Boolean NOT NULL,
+    latitude REAL AS Double NOT NULL,
+    longitude REAL AS Double NOT NULL,
+    isOffline INTEGER AS Boolean NOT NULL,
+    needAction INTEGER AS Boolean NOT NULL,
+    recorder TEXT AS RecorderDto,
+    type text AS Type NOT NULL,
+    date text NOT NULL,
+    workflowStatus text AS Type,
+    workplaceStatus text AS Type
+
+--     FOREIGN KEY (recorderId) REFERENCES RecorderEntity(id) todo relations
+);
+
+CREATE TABLE AddLogInputEntity(
+    date TEXT PRIMARY KEY NOT NULL,
+    userId TEXT NOT NULL,
+    latitude REAL AS Double NOT NULL,
+    longitude REAL AS Double NOT NULL,
+    isOffline INTEGER AS Boolean NOT NULL,
+    recorder TEXT AS RecorderDto,
+    type TEXT AS Type NOT NULL
+);
+
+-- -- Attendance -------------------------------------------------------
+-- insertAttendance:
+-- INSERT OR REPLACE INTO AttendanceEntity VALUES (?,?,?,?);
+--
+-- selectAllAttendance:
+-- SELECT * FROM AttendanceEntity;
+
+-- Log -------------------------------------------------------
+insertLog:
+INSERT OR REPLACE INTO LogEntity VALUES (?,?,?,?,?,?,?,?,?,?,?);
+
+selectAllLogs:
+SELECT * FROM LogEntity;
+
+selectAllOfflineLogs:
+SELECT * FROM LogEntity WHERE isOffline = 1;
+
+selectLogById:
+SELECT * FROM LogEntity WHERE id = ?;
+
+deleteAllLogs:
+DELETE FROM LogEntity;
+
+-- AddLogInput -------------------------------------------------------
+getAllAddLogInputs:
+SELECT * FROM AddLogInputEntity;
+
+insertAddLogInput:
+INSERT OR REPLACE INTO AddLogInputEntity VALUES(?,?,?,?,?,?,?);
+
+deleteAllAddLogInputs:
+DELETE FROM AddLogInputEntity;
+
+
+
+
+
+

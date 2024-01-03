@@ -1,0 +1,57 @@
+import com.attendace.leopard.data.source.remote.model.dto.RecorderDto;
+import com.attendace.leopard.data.source.remote.model.dto.Type;
+import kotlin.Boolean;
+import kotlin.Double;
+
+
+CREATE TABLE WorkplaceEntity (
+   id TEXT PRIMARY KEY NOT NULL,
+   isDeleted INTEGER AS Boolean NOT NULL,
+   name TEXT NOT NULL,
+   latitude REAL AS Double NOT NULL,
+   longitude REAL AS Double NOT NULL,
+   radius REAL AS Double NOT NULL
+);
+
+CREATE TABLE RecorderEntity(
+   id TEXT PRIMARY KEY NOT NULL,
+   name TEXT NOT NULL,
+   radius REAL AS Double NOT NULL,
+   latitude REAL AS Double NOT NULL,
+   longitude REAL AS Double NOT NULL,
+   isPrimary INTEGER AS Boolean NOT NULL,
+   isDeleted INTEGER AS Boolean NOT NULL,
+   recorderType TEXT AS Type NOT NULL,
+   workplaceId TEXT NOT NULL,
+
+   FOREIGN KEY (workplaceId) REFERENCES WorkplaceEntity(id)
+);
+
+
+-- Workplace -------------------------------------------------------
+selectAllWorkplaces:
+SELECT * FROM WorkplaceEntity LEFT JOIN RecorderEntity ON RecorderEntity.workplaceId = WorkplaceEntity.id;
+
+insertWorkplace:
+INSERT OR REPLACE INTO WorkplaceEntity VALUES (?, ?, ?, ?, ?, ?);
+
+deleteWorkplaces:
+DELETE FROM WorkplaceEntity ;
+
+deleteRecorders:
+DELETE FROM RecorderEntity ;
+
+-- deleteWorkplace: //todo do we need it?
+-- DELETE FROM WorkplaceEntity WHERE id = ?;
+--
+-- selectWokrplaceById:
+-- SELECT * FROM WorkplaceEntity WHERE id = ?;
+
+
+-- Recorder -------------------------------------------------------
+insertRecorder:
+INSERT OR REPLACE INTO RecorderEntity VALUES (?,?,?,?,?,?,?,?,?);
+
+
+
+

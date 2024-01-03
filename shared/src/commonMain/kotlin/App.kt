@@ -1,41 +1,42 @@
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import org.jetbrains.compose.resources.ExperimentalResourceApi
-import org.jetbrains.compose.resources.painterResource
+package com.attendace.leopard
 
-@OptIn(ExperimentalResourceApi::class)
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.LayoutDirection
+import com.attendace.leopard.di.dataModule
+import com.attendace.leopard.di.dataPlatformModule
+import com.attendace.leopard.di.repositoryModule
+import com.attendace.leopard.di.viewModelModule
+import com.attendace.leopard.presentation.screen.navigation.AppNavigation
+import com.attendace.leopard.util.localization.LanguageTypeEnum
+import com.attendace.leopard.util.theme.LeopardTheme
+import com.attendace.leopard.util.theme.language
+import org.koin.compose.KoinApplication
+
 @Composable
-fun App() {
-    MaterialTheme {
-        var greetingText by remember { mutableStateOf("Hello, World!") }
-        var showImage by remember { mutableStateOf(false) }
-        Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-            Button(onClick = {
-                greetingText = "Hello, ${getPlatformName()}"
-                showImage = !showImage
-            }) {
-                Text(greetingText)
-            }
-            AnimatedVisibility(showImage) {
-                Image(
-                    painterResource("compose-multiplatform.xml"),
-                    contentDescription = "Compose Multiplatform icon"
-                )
+fun App(context: Any? = null) {
+    KoinApplication(application = {
+        modules(dataPlatformModule(context), dataModule, repositoryModule, viewModelModule)
+    }) {
+        CompositionLocalProvider(
+            LocalLayoutDirection provides
+                    if (language.value == LanguageTypeEnum.English) LayoutDirection.Ltr
+                    else LayoutDirection.Rtl
+        ) {
+            LeopardTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colors.background
+                ) {
+                    AppNavigation()
+                }
             }
         }
     }
-}
 
-expect fun getPlatformName(): String
+}

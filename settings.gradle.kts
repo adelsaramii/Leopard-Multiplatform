@@ -1,4 +1,4 @@
-rootProject.name = "MyApplication"
+rootProject.name = "leopard"
 
 include(":androidApp")
 include(":shared")
@@ -28,14 +28,21 @@ pluginManagement {
     }
 }
 
-plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version("0.4.0")
-}
-
 dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        mavenCentral()
         google()
-        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+        mavenCentral()
+        maven(url = "https://jitpack.io")
+//        maven(url = "https://api.mapbox.com/downloads/v2/releases/maven") {
+//            authentication {
+//                create<BasicAuthentication>("basic")
+//            }
+//            credentials {
+//                username = "mapbox"
+//                password = "sk.eyJ1Ijoia2FzcmFkZXZlbG9wZXIiLCJhIjoiY2xvMWQycGNpMWtodDJycW9zdTU4OW0ybiJ9.3AERMLpW9covtn043gsBQQ"
+//            }
+//        }
+        maven(url = "https://download2.dynamsoft.com/maven/aar")
     }
 }

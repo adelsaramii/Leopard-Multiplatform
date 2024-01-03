@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "47854786228",
+    "project_id": "leopard-9d045",
+    "storage_bucket": "leopard-9d045.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:47854786228:android:ba8a0f47c38a2e3f0f29e1",
+        "android_client_info": {
+          "package_name": "com.attendance.leopard.and"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "47854786228-6v08v2u3u1jhvrqmc9elpal8rucqqj0u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.attendance.leopard.and",
+            "certificate_hash": "7a59e43a6afbf0d75d964a6b740fac70f38f9893"
+          }
+        },
+        {
+          "client_id": "47854786228-nu83adkrhli84k51j6mn4rp45sguvn9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiJUeqCsDK8FC8AzGECyWFXiSf_zg2XKI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "47854786228-nu83adkrhli84k51j6mn4rp45sguvn9h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
